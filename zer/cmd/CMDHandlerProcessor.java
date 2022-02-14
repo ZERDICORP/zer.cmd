@@ -31,10 +31,12 @@ public class CMDHandlerProcessor
 				CMDPattern ann = clazz.getAnnotation(CMDPattern.class);
         if (value.matches(ann.value()))
         {
-          handler.handle(value);
+          handler.handle(args);
           break;
         }
 			}
+      else
+        System.out.println("[warn]: handler \"" + clazz.getName() + "\" has no annotation \"" + CMDPattern.class.getName() + "\".. skipped"); 
 		}
 	}
 }
