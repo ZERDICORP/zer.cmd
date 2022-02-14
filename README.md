@@ -23,7 +23,6 @@
   
   ```java
   import zer.cmd.CMDHandlerProcessor;
-  
   import handlers.Handler_Example;
 
   public class Main
