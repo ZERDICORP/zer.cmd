@@ -37,8 +37,7 @@ public class Handler_Example extends CMDHandler
 }
 ```
 
-Well, now it remains to create an instance of the __CMDHandlerProcessor__ class and add our handler created above to it.  
-After that, we start the processor by passing command line arguments to it.
+Well, now it remains to create an instance of the __CMDHandlerProcessor__ class and add our handler created above to it. After that, we start the processor by passing command line arguments to it.
 
 ```java
 /* Main.java */
