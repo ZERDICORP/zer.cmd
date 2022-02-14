@@ -13,5 +13,5 @@ import java.lang.annotation.ElementType;
 @Target(ElementType.TYPE)
 public @interface CMDPattern
 {
-	String value();
+  String value();
 }
