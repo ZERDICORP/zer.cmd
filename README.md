@@ -3,73 +3,67 @@
 
 ## Example of usage :sheep:
 
-<details>
-  <summary>Project structure :deciduous_tree:</summary>
-  
-  ```
-  ├── Main.java
-  ├── handlers
-  │   └── Handler_Example.java
-  └── zer
-      └── cmd
-          ├── CMDHandler.java
-          ├── CMDHandlerProcessor.java
-          └── CMDPattern.java
-  ```
-</details>
+Project structure :deciduous_tree:
+```
+├── Main.java
+├── handlers
+│   └── Handler_Example.java
+└── zer
+    └── cmd
+        ├── CMDHandler.java
+        ├── CMDHandlerProcessor.java
+        └── CMDPattern.java
+```
 
-<details>
-  <summary>Main.java</summary>
-  
-  ```java
-  import zer.cmd.CMDHandlerProcessor;
-  import handlers.Handler_Example;
+First, let's create a handler that will have an annotation with the value that this handler expects from the command line.
 
-  public class Main
+```java
+/* handlers.Handler_Example.java */
+
+package handlers;
+
+import zer.cmd.CMDPattern;
+import zer.cmd.CMDHandler;
+
+@CMDPattern("example 1 2 3")
+public class Handler_Example extends CMDHandler
+{
+  @Override
+  public void handle(String[] args)
   {
-    public static void main(String[] args)
-    {
-      CMDHandlerProcessor processor = CMDHandlerProcessor.getInstance();
-
-      processor.add(new Handler_Example());
-
-      processor.process(args);
-    }
+    for (String arg : args)
+      System.out.println("arg: " + arg);
   }
-  ```
-</details>
+}
+```
 
-<details>
-  <summary>handlers.Handler_Example.java</summary>
-  
-  ```java
-  package handlers;
+Well, now it remains to create an instance of the __CMDHandlerProcessor__ class and add our handler created above to it.  
+After that, we start the processor by passing command line arguments to it.
 
-  import zer.cmd.CMDPattern;
-  import zer.cmd.CMDHandler;
+```java
+/* Main.java */
 
-  @CMDPattern("example 1 2 3")
-  public class Handler_Example extends CMDHandler
+import zer.cmd.CMDHandlerProcessor;
+import handlers.Handler_Example;
+
+public class Main
+{
+  public static void main(String[] args)
   {
-    @Override
-    public void handle(String[] args)
-    {
-      for (String arg : args)
-        System.out.println("arg: " + arg);
-    }
-  }
-  ```
-</details>
+    CMDHandlerProcessor processor = CMDHandlerProcessor.getInstance();
 
-<details>
-  <summary>Result :sparkles:</summary>
-  
-  ```
-  $ javac Main.java
-  $ java Main example 1 2 3
-  arg: example
-  arg: 1
-  arg: 2
-  arg: 3
-  ```
-</details>
+    processor.add(new Handler_Example());
+
+    processor.process(args);
+  }
+}
+```
+
+```
+$ javac Main.java
+$ java Main example 1 2 3
+arg: example
+arg: 1
+arg: 2
+arg: 3
+```
